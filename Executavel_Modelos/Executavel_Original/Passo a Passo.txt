@@ -1,0 +1,31 @@
+1) Instalar o Pyinstaller:
+pip install pyinstaller
+
+
+2) Executar o Pyinstaller para gerar um arquivo Executável:
+pyinstaller (nome do arquivo).py -w
+
+
+3) Alterar o arquivo (nome do arquivo).spec com os seguintes dados:
+- from kivy_deps import sdl2, glew
+
+- ...pyz = PYZ(a.pure, a.zipped_data,
+             cipher=block_cipher)
+
+a.datas += [('Code\(nome do arquivo).kv',
+'C:\\(diretório onde estão os arquivos)\(nome do arquivo).kv',
+'DATA')]
+
+exe = EXE(pyz, ...
+
+-coll = COLLECT(exe,
+Tree('C:\\(diretório onde estão os arquivos)\\'),
+
+-a.datas, 
+*[Tree(p) for p in 
+(sdl2.dep_bins +
+glew.dep_bins)],
+
+4) Executar o Pyinstaller novamente atualizando o arquivo .spec:
+pyinstaller (nome do arquivo).py -y
+
